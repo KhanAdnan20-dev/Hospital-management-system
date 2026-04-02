@@ -5,6 +5,10 @@ from pydantic import BaseModel, ConfigDict
 from models import GenderEnum, RoomStatusEnum
 
 
+class ORMReadModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+
 class PatientCreate(BaseModel):
     name: str
     age: int
@@ -14,10 +18,8 @@ class PatientCreate(BaseModel):
     room_id: Optional[int] = None
 
 
-class PatientRead(PatientCreate):
+class PatientRead(PatientCreate, ORMReadModel):
     id: int
-
-    model_config = ConfigDict(from_attributes=True)
 
 
 class DoctorCreate(BaseModel):
@@ -25,10 +27,8 @@ class DoctorCreate(BaseModel):
     specialty: str
 
 
-class DoctorRead(DoctorCreate):
+class DoctorRead(DoctorCreate, ORMReadModel):
     id: int
-
-    model_config = ConfigDict(from_attributes=True)
 
 
 class RoomCreate(BaseModel):
@@ -37,7 +37,5 @@ class RoomCreate(BaseModel):
     status: RoomStatusEnum = RoomStatusEnum.available
 
 
-class RoomRead(RoomCreate):
+class RoomRead(RoomCreate, ORMReadModel):
     id: int
-
-    model_config = ConfigDict(from_attributes=True)
