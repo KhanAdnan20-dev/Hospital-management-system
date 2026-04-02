@@ -38,4 +38,3 @@ npm install
 npm run dev
 ```
 
-The frontend runs with Vite and should connect to the API at `http://localhost:8000`.
