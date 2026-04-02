@@ -2,11 +2,13 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 
+from models import GenderEnum, RoomStatusEnum
+
 
 class PatientCreate(BaseModel):
     name: str
     age: int
-    gender: str
+    gender: GenderEnum
     diagnosis: Optional[str] = None
     doctor_id: Optional[int] = None
     room_id: Optional[int] = None
@@ -32,7 +34,7 @@ class DoctorRead(DoctorCreate):
 class RoomCreate(BaseModel):
     room_number: str
     room_type: str
-    status: str = "available"
+    status: RoomStatusEnum = RoomStatusEnum.available
 
 
 class RoomRead(RoomCreate):
